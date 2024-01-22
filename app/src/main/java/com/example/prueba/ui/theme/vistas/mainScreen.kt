@@ -1,8 +1,5 @@
 package com.example.prueba.ui.theme.vistas
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -44,10 +41,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.prueba.R
-import com.example.prueba.ui.theme.PruebaTheme
 import com.example.prueba.ui.theme.model.City
 import com.example.prueba.ui.theme.model.City.Companion.generarCiudades
 import com.example.prueba.ui.theme.model.GetTimeAsyncTask
+
+var citySelec = ""
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -170,6 +168,7 @@ fun WorldClockCard(city: City, navigationController: NavHostController) {
                 IconButton(
                     onClick = {
                         navigationController.navigate("pantalla02")
+                        citySelec = city.name()
                     },
                     modifier = Modifier.align(Alignment.CenterVertically)
                 ) {

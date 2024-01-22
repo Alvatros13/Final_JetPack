@@ -13,8 +13,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.prueba.ui.theme.PruebaTheme
 import com.example.prueba.ui.theme.model.Routes
-import com.example.prueba.ui.theme.vistas.cityInfoScreen
 import com.example.prueba.ui.theme.vistas.WorldClockApp
+import com.example.prueba.ui.theme.vistas.cityInfoScreen
+import com.example.prueba.ui.theme.vistas.citySelec
 
 
 class MainActivity : ComponentActivity() {
@@ -32,9 +33,9 @@ class MainActivity : ComponentActivity() {
                         navController = navigationController,
                         startDestination = Routes.Pantalla01.route
                     ) {
-                        composable("pantalla02") { cityInfoScreen(navigationController)}
+                        composable("pantalla02") { cityInfoScreen(navigationController, citySelec)}
                         composable(Routes.Pantalla01.route) { WorldClockApp(navigationController) }
-                        composable(Routes.Pantalla02.route) { cityInfoScreen(navigationController) }
+                        composable(Routes.Pantalla02.route) { cityInfoScreen(navigationController, citySelec) }
                     }
 
                 }
