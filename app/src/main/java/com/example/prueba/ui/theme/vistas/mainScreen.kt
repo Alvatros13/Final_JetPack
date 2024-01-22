@@ -45,83 +45,16 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.prueba.R
 import com.example.prueba.ui.theme.PruebaTheme
+import com.example.prueba.ui.theme.model.City
+import com.example.prueba.ui.theme.model.City.Companion.generarCiudades
 import com.example.prueba.ui.theme.model.GetTimeAsyncTask
-
-class mainScreen : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            PruebaTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    PreviewWorldClockApp()
-                }
-            }
-        }
-    }
-}
-
-/*class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            NavegacionTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    val navigationController = rememberNavController()
-                    NavHost(
-                        navController = navigationController,
-                        startDestination = Routes.Pantalla01.route
-                    ) {
-                        composable(Routes.Pantalla01.route) { Screen01(navigationController, activity = this@MainActivity) }
-                        composable(Routes.Pantalla02.route) { Screen02(navigationController) }
-                    }
-                }
-            }
-        }
-    }
-}*/
-
-data class City(val name: String, val timezone: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun WorldClockApp(navigationController: NavHostController) {
     var searchText by remember { mutableStateOf("") }
     var selectedCity by remember { mutableStateOf<City?>(null) }
-    var cities by remember {
-        mutableStateOf(
-            listOf(
-                City("New York", "America/New_York"),
-                City("Los Angeles", "America/Los_Angeles"),
-                City("Chicago", "America/Chicago"),
-                City("Houston", "America/Chicago"),
-                City("London", "Europe/London"),
-                City("Paris", "Europe/Paris"),
-                City("Berlin", "Europe/Berlin"),
-                City("Tokyo", "Asia/Tokyo"),
-                City("Beijing", "Asia/Shanghai"),
-                City("Sydney", "Australia/Sydney"),
-                City("Moscow", "Europe/Moscow"),
-                City("Istanbul", "Europe/Istanbul"),
-                City("Rio de Janeiro", "America/Sao_Paulo"),
-                City("Cairo", "Africa/Cairo"),
-                City("Mumbai", "Asia/Kolkata"),
-                City("Cape Town", "Africa/Johannesburg"),
-                City("Toronto", "America/Toronto"),
-                City("Dubai", "Asia/Dubai"),
-                City("Mexico City", "America/Mexico_City"),
-                City("Seoul", "Asia/Seoul")
-                // Add more cities as needed
-            )
-        )
-    }
+    var cities = generarCiudades();
 
     Column(
         modifier = Modifier
@@ -151,7 +84,7 @@ fun WorldClockApp(navigationController: NavHostController) {
                 .weight(1f)
                 .fillMaxWidth()
         ) {
-            items(cities.filter { it.name.contains(searchText, ignoreCase = true) }) { city ->
+            items(cities.filter { it.name().contains(searchText, ignoreCase = true) }) { city ->
                 CityItem(city = city, onClick = { selectedCity = city })
             }
         }
@@ -170,7 +103,7 @@ fun CityItem(city: City, onClick: (String) -> Unit) {
     Surface(
         modifier = Modifier.clickable {
             // Ejecutar GetTimeAsyncTask y obtener la hora actual
-            val getTimeAsyncTask = GetTimeAsyncTask(city.timezone, object : GetTimeAsyncTask.OnTimeFetchedListener {
+            val getTimeAsyncTask = GetTimeAsyncTask(city.timezone(), object : GetTimeAsyncTask.OnTimeFetchedListener {
                 override fun onTimeFetched(result: String) {
                     // Almacena la hora actual
                     currentTime = result
@@ -194,8 +127,8 @@ fun CityItem(city: City, onClick: (String) -> Unit) {
             )
             Spacer(modifier = Modifier.width(16.dp))
             Column {
-                Text(text = city.name, style = MaterialTheme.typography.bodySmall)
-                Text(text = city.timezone, style = MaterialTheme.typography.bodyMedium)
+                Text(text = city.name(), style = MaterialTheme.typography.bodySmall)
+                Text(text = city.timezone(), style = MaterialTheme.typography.bodyMedium)
             }
             Spacer(modifier = Modifier.weight(1f))
             //Text(text = currentTime, style = MaterialTheme.typography.bodyMedium)
@@ -225,11 +158,11 @@ fun WorldClockCard(city: City, navigationController: NavHostController) {
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(
-                        text = city.name,
+                        text = city.name(),
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.primary
                     )
-                    Text(text = city.timezone, color = Color.Gray)
+                    Text(text = city.timezone(), color = Color.Gray)
                     Spacer(modifier = Modifier.height(16.dp))
                 }
 

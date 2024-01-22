@@ -1,6 +1,6 @@
 package com.example.prueba.ui.theme.model
 
-class City (val nombre: String, val zona: String){
+class City(val name: String, val timeZone: String) {
     companion object {
         fun generarCiudades(): List<City> {
             val ciudades = listOf(
@@ -28,4 +28,14 @@ class City (val nombre: String, val zona: String){
             return ciudades
         }
     }
+
+    fun name(): String {
+        return name
+    }
+
+    fun timezone(): String {
+        return timeZone
+    }
 }
+
+

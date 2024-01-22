@@ -19,7 +19,7 @@ import com.example.prueba.ui.theme.PruebaTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MyScreenContent(navigationController: NavHostController) {
+fun cityInfoScreen(navigationController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
