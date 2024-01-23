@@ -53,7 +53,6 @@ fun WorldClockApp(navigationController: NavHostController) {
     var searchText by remember { mutableStateOf("") }
     var selectedCity by remember { mutableStateOf<City?>(null) }
     var cities = generarCiudades();
-
     Column(
         modifier = Modifier
             .fillMaxSize()

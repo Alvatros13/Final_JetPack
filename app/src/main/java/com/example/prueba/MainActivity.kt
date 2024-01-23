@@ -29,6 +29,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     val navigationController = rememberNavController()
+                    //uploadCiudades()
                     NavHost(
                         navController = navigationController,
                         startDestination = Routes.Pantalla01.route

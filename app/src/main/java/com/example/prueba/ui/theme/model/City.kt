@@ -23,7 +23,12 @@ class City(val name: String, val timeZone: String) {
                 City("Toronto", "America/Toronto"),
                 City("Dubai", "Asia/Dubai"),
                 City("Mexico City", "America/Mexico_City"),
-                City("Seoul", "Asia/Seoul")
+                City("Seoul", "Asia/Seoul"),
+                City("Madrid", "Europe/Madrid"),
+                City("Granada", "Europe/Madrid"),
+                City("Sydney", "Australia/Sydney"),
+                City("New Delhi", "Asia/Kolkata"),
+                City("Rome", "Europe/Rome")
             )
             return ciudades
         }

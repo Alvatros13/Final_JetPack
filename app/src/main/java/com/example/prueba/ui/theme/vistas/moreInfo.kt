@@ -1,18 +1,25 @@
 package com.example.prueba.ui.theme.vistas
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.prueba.R
 import com.example.prueba.ui.theme.PruebaTheme
+import com.google.accompanist.pager.*
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -47,12 +54,41 @@ fun cityInfoScreen(navigationController: NavHostController, citySelec : String) 
 
         // Content of the screen
         Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 16.dp),
+            verticalArrangement = Arrangement.Top,
             horizontalAlignment = androidx.compose.ui.Alignment.CenterHorizontally
         ) {
-            Text(text = "Hello, World!")
+            ImageCarousel(
+                imageList = listOf(
+                        R.drawable.paris,
+                        R.drawable.paris,
+                        R.drawable.paris
+                    ))
         }
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class, ExperimentalFoundationApi::class)
+@Composable
+fun ImageCarousel(imageList: List<Int>) {
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f
+    ) {
+        imageList.count()
+    }
+
+    HorizontalPager(state = pagerState) { page ->
+        Image(
+            painter = painterResource(id = imageList[page]),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp)
+        )
     }
 }
 
