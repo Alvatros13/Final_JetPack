@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     val navigationController = rememberNavController()
                     //uploadCiudades()
+                    //downloadImg()
                     NavHost(
                         navController = navigationController,
                         startDestination = Routes.Pantalla01.route

@@ -1,12 +1,15 @@
 package com.example.prueba.ui.theme.model
 
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 
 class firebaseController {
-    val database: FirebaseDatabase = FirebaseDatabase.getInstance("https://reloj-mundial-f29a5-default-rtdb.europe-west1.firebasedatabase.app/")
-    var ref: DatabaseReference = database.getReference("citys")
-    var usersRef = ref.child("citys")
+    val database = Firebase.database
+    val ref = database.getReference("citys")
+    var citysRef = ref.child("citys")
+    val storage = FirebaseStorage.getInstance()
+    var storageRef = storage.reference
     companion object {
         /*fun uploadCiudades() {
             val database = Firebase.database
@@ -25,8 +28,5 @@ class firebaseController {
                 cityRef.setValue(lista)
             }
         }*/
-        fun downloadImg(){
-
-        }
     }
 }
