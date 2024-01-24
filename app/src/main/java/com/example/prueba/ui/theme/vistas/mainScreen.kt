@@ -62,7 +62,7 @@ fun WorldClockApp(navigationController: NavHostController) {
         OutlinedTextField(
             value = searchText,
             onValueChange = { searchText = it },
-            label = { Text("Search City") },
+            label = { Text("Buscar Ciudad") },
             keyboardOptions = KeyboardOptions.Default.copy(
                 imeAction = ImeAction.Done
             ),
@@ -94,7 +94,6 @@ var currentTime ="Loading..."
 
 @Composable
 fun CityItem(city: City, onClick: (String) -> Unit) {
-    // Definir el estado para el botón de estrella
     var isStarred by remember { mutableStateOf(false) }
 
     Surface(
@@ -128,16 +127,12 @@ fun CityItem(city: City, onClick: (String) -> Unit) {
                 Text(text = city.timezone(), style = MaterialTheme.typography.bodyMedium)
             }
             Spacer(modifier = Modifier.weight(1f))
-
-            // Usar un IconButton para el botón de estrella
             IconButton(
                 onClick = {
                     isStarred = !isStarred
-                    // Puedes ejecutar alguna lógica adicional aquí si es necesario
                 },
                 modifier = Modifier.size(24.dp)
             ) {
-                // Mostrar el icono de estrella con o sin relleno según el estado
                 if (isStarred) {
                     Icon(
                         painter = painterResource(id = R.drawable.baseline_star_24),
@@ -174,7 +169,6 @@ fun WorldClockCard(city: City, navigationController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Column con weight para dejar espacio
                 Column(
                     modifier = Modifier.weight(1f)
                 ) {
@@ -186,8 +180,6 @@ fun WorldClockCard(city: City, navigationController: NavHostController) {
                     Text(text = city.timezone(), color = Color.Gray)
                     Spacer(modifier = Modifier.height(16.dp))
                 }
-
-                // IconButton al extremo derecho del Row
                 IconButton(
                     onClick = {
                         navigationController.navigate("pantalla02")
@@ -206,10 +198,9 @@ fun WorldClockCard(city: City, navigationController: NavHostController) {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                // Cambiado el icono a uno personalizado desde drawable
                 ClockItem(
                     icon = painterResource(id = R.drawable.black_access_time),
-                    text = "Current Time",
+                    text = "Hora Actual",
                     value = currentTime
                 )
             }
