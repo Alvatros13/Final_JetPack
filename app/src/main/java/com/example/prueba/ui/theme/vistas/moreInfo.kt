@@ -16,7 +16,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.prueba.ui.theme.PruebaTheme
 import com.google.accompanist.pager.*
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -192,7 +191,5 @@ suspend fun downloadText(citySelec : String): List<String> = suspendCoroutine { 
 @Preview(showBackground = true)
 @Composable
 fun PreviewMyScreenContent() {
-    PruebaTheme {
-        //MyScreenContent()
-    }
+    //MyScreenContent()
 }

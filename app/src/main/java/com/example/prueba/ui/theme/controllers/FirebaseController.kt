@@ -1,4 +1,4 @@
-package com.example.prueba.ui.theme.model
+package com.example.prueba.ui.theme.controllers
 
 class firebaseController {
     companion object {
