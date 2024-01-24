@@ -1,7 +1,5 @@
 package com.example.prueba.ui.theme.vistas
 
-import android.content.ContentValues
-import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
@@ -34,7 +32,7 @@ fun cityInfoScreen(navigationController: NavHostController, citySelec : String) 
     var loading by remember { mutableStateOf(true) }
 
     LaunchedEffect(Unit) {
-        listaImg = downloadImg()
+        listaImg = downloadImg(citySelec)
         loading = false
     }
 
@@ -53,7 +51,7 @@ fun cityInfoScreen(navigationController: NavHostController, citySelec : String) 
             .fillMaxWidth(),
         verticalArrangement = Arrangement.Center
     ) {
-        // TopAppBar with IconButton and Text in the center
+        //Top Bar de la pantalla
         TopAppBar(
             modifier = Modifier
                 .fillMaxWidth(),
@@ -74,8 +72,7 @@ fun cityInfoScreen(navigationController: NavHostController, citySelec : String) 
                 }
             },
         )
-
-        // Content of the screen
+        //Contenido de la pantalla
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -106,16 +103,17 @@ fun ImageCarousel(urlList: List<String>) {
             contentDescription = null,
             modifier = Modifier
                 .fillMaxWidth()
+                .width(IntrinsicSize.Max)
                 .height(200.dp)
         )
     }
 }
 
 
-suspend fun downloadImg(): List<String> = suspendCoroutine { continuation ->
+suspend fun downloadImg(citySelec : String): List<String> = suspendCoroutine { continuation ->
     val database = Firebase.database
     val ref = database.getReference("citys")
-    val cityRef = ref.child("Beijing")
+    val cityRef = ref.child(citySelec)
     var listaImg: List<String> = emptyList()
 
     cityRef.addValueEventListener(object : ValueEventListener {
@@ -124,16 +122,13 @@ suspend fun downloadImg(): List<String> = suspendCoroutine { continuation ->
             val value2 = snapshot.child("1").getValue().toString()
             val value3 = snapshot.child("2").getValue().toString()
             listaImg = listOf(value1, value2, value3)
-            Log.w(ContentValues.TAG, "Values are $value1 $value2 $value3")
+            //Log.w(ContentValues.TAG, "Values are $value1 $value2 $value3")
 
             // Cuando la descarga se completa, se llama a la continuación con la lista de imágenes.
             continuation.resume(listaImg)
         }
 
-        override fun onCancelled(error: DatabaseError) {
-            Log.w(ContentValues.TAG, "Failed to read value.", error.toException())
-            // Si ocurre un error, también se puede manejar con continuation.resumeWithException(error.toException())
-        }
+        override fun onCancelled(error: DatabaseError) {}
     })
 }
 

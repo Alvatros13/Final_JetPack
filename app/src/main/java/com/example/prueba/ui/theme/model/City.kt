@@ -5,7 +5,7 @@ class City(val name: String, val timeZone: String) {
         fun generarCiudades(): List<City> {
             val ciudades = listOf(
                 City("New York", "America/New_York"),
-                City("Los Angeles", "America/Los_Angeles"),
+                City("Los_Angeles", "America/Los_Angeles"),
                 City("Chicago", "America/Chicago"),
                 City("Houston", "America/Chicago"),
                 City("London", "Europe/London"),
@@ -16,18 +16,18 @@ class City(val name: String, val timeZone: String) {
                 City("Sydney", "Australia/Sydney"),
                 City("Moscow", "Europe/Moscow"),
                 City("Istanbul", "Europe/Istanbul"),
-                City("Rio de Janeiro", "America/Sao_Paulo"),
+                City("Rio_de_Janeiro", "America/Sao_Paulo"),
                 City("Cairo", "Africa/Cairo"),
                 City("Mumbai", "Asia/Kolkata"),
-                City("Cape Town", "Africa/Johannesburg"),
+                City("Cape_Town", "Africa/Johannesburg"),
                 City("Toronto", "America/Toronto"),
                 City("Dubai", "Asia/Dubai"),
-                City("Mexico City", "America/Mexico_City"),
+                City("Mexico_City", "America/Mexico_City"),
                 City("Seoul", "Asia/Seoul"),
                 City("Madrid", "Europe/Madrid"),
                 City("Granada", "Europe/Madrid"),
                 City("Sydney", "Australia/Sydney"),
-                City("New Delhi", "Asia/Kolkata"),
+                City("New_Delhi", "Asia/Kolkata"),
                 City("Rome", "Europe/Rome")
             )
             return ciudades

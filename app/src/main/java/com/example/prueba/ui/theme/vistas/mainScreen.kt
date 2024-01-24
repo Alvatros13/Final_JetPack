@@ -67,9 +67,7 @@ fun WorldClockApp(navigationController: NavHostController) {
                 imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(
-                onDone = {
-                    // Handle search or filtering logic
-                }
+                onDone = {}
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -128,7 +126,11 @@ fun CityItem(city: City, onClick: (String) -> Unit) {
                 Text(text = city.timezone(), style = MaterialTheme.typography.bodyMedium)
             }
             Spacer(modifier = Modifier.weight(1f))
-            //Text(text = currentTime, style = MaterialTheme.typography.bodyMedium)
+            Icon(
+                painter  = painterResource(id = R.drawable.black_add),
+                contentDescription = null,
+                modifier = Modifier.size(24.dp)
+            )
         }
     }
 }
@@ -188,11 +190,6 @@ fun WorldClockCard(city: City, navigationController: NavHostController) {
                     text = "Current Time",
                     value = currentTime
                 )
-                /*ClockItem(
-                    icon = Icons.Default.Refresh,
-                    text = "Last Updated",
-                    value = "2 minutes ago" // Opcional: puedes actualizar esto con la hora actualizada
-                )*/
             }
         }
     }
