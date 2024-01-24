@@ -94,6 +94,8 @@ var currentTime ="Loading..."
 
 @Composable
 fun CityItem(city: City, onClick: (String) -> Unit) {
+    // Definir el estado para el botón de estrella
+    var isStarred by remember { mutableStateOf(false) }
 
     Surface(
         modifier = Modifier.clickable {
@@ -126,14 +128,34 @@ fun CityItem(city: City, onClick: (String) -> Unit) {
                 Text(text = city.timezone(), style = MaterialTheme.typography.bodyMedium)
             }
             Spacer(modifier = Modifier.weight(1f))
-            Icon(
-                painter  = painterResource(id = R.drawable.black_add),
-                contentDescription = null,
+
+            // Usar un IconButton para el botón de estrella
+            IconButton(
+                onClick = {
+                    isStarred = !isStarred
+                    // Puedes ejecutar alguna lógica adicional aquí si es necesario
+                },
                 modifier = Modifier.size(24.dp)
-            )
+            ) {
+                // Mostrar el icono de estrella con o sin relleno según el estado
+                if (isStarred) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_star_24),
+                        contentDescription = null,
+                        tint = Color.Yellow
+                    )
+                } else {
+                    Icon(
+                        painter = painterResource(id = R.drawable.black_star_outline),
+                        contentDescription = null,
+                        tint = Color.Black
+                    )
+                }
+            }
         }
     }
 }
+
 
 @Composable
 fun WorldClockCard(city: City, navigationController: NavHostController) {

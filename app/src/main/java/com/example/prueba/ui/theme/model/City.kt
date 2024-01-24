@@ -4,7 +4,7 @@ class City(val name: String, val timeZone: String) {
     companion object {
         fun generarCiudades(): List<City> {
             val ciudades = listOf(
-                City("New York", "America/New_York"),
+                City("New_York", "America/New_York"),
                 City("Los_Angeles", "America/Los_Angeles"),
                 City("Chicago", "America/Chicago"),
                 City("Houston", "America/Chicago"),

@@ -1,19 +1,10 @@
 package com.example.prueba.ui.theme.model
 
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-
 class firebaseController {
-    val database = Firebase.database
-    val ref = database.getReference("citys")
-    var citysRef = ref.child("citys")
-    val storage = FirebaseStorage.getInstance()
-    var storageRef = storage.reference
     companion object {
         /*fun uploadCiudades() {
             val database = Firebase.database
-            val ref = database.getReference("citys")
+            val ref = database.getReference("Texts")
 
             val cities = listOf(
                 "New York", "Los Angeles", "Chicago", "Houston", "London", "Paris",
@@ -23,9 +14,9 @@ class firebaseController {
             )
 
             for (city in cities) {
-                val cityRef = ref.child(city.replace(" ", "_")) // Reemplaza espacios con guiones bajos
-                val lista = listOf("prueba1", "prueba2", "prueba3")
-                cityRef.setValue(lista)
+                val cityRef = ref.child(city.replace(" ", "_"))
+                val text = listOf<String>("prueba1", "prueba2", "prueba3")
+                cityRef.setValue(text)
             }
         }*/
     }
