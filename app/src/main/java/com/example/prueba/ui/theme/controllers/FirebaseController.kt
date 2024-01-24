@@ -4,7 +4,7 @@ class firebaseController {
     companion object {
         /*fun uploadCiudades() {
             val database = Firebase.database
-            val ref = database.getReference("Texts")
+            val ref = database.getReference("")
 
             val cities = listOf(
                 "New York", "Los Angeles", "Chicago", "Houston", "London", "Paris",
