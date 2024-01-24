@@ -3,13 +3,13 @@ package com.example.prueba.ui.theme.vistas
 import android.util.Log
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -52,13 +52,11 @@ fun cityInfoScreen(navigationController: NavHostController, citySelec : String) 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .fillMaxWidth(),
-        verticalArrangement = Arrangement.Center
+            .fillMaxWidth()
     ) {
-        //Top Bar de la pantalla
+        // TopBar de la pantalla
         TopAppBar(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.LightGray),
             title = {
                 Text(
@@ -76,34 +74,46 @@ fun cityInfoScreen(navigationController: NavHostController, citySelec : String) 
                 }
             },
         )
-        //Contenido de la pantalla
-        Column(
+
+        // LazyColumn para el contenido desplazable
+        LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .fillMaxWidth()
-                .padding(top = 16.dp),
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(top = 16.dp)
         ) {
-            ImageCarousel(listaImg)
+            item {
+                // Contenido de la pantalla
+                ImageCarousel(listaImg)
 
-            // Línea de separación
-            Spacer(modifier = Modifier.height(16.dp))
-            Divider(
-                color = Color.Black,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp) // Ajusta la altura según sea necesario
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            // Función textGenerator
-            Text(text = listText[0])
-            Spacer(modifier = Modifier.height(8.dp))
-            // Función textGenerator
-            Text(text = listText[1])
-            Spacer(modifier = Modifier.height(8.dp))
-            // Función textGenerator
-            Text(text = listText[2])
+                Spacer(modifier = Modifier.height(16.dp))
+                Divider(
+                    color = Color.Black,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(1.dp)
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+
+                Text(
+                    text = listText[0],
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+
+                // Función textGenerator con margen lateral
+                Text(
+                    text = listText[1],
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = Modifier.height(15.dp))
+
+                // Función textGenerator con margen lateral
+                Text(
+                    text = listText[2],
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
         }
     }
 }
@@ -132,7 +142,7 @@ fun ImageCarousel(urlList: List<String>) {
     }
 }
 
-
+//Función para descargar las imagenes
 suspend fun downloadImg(citySelec : String): List<String> = suspendCoroutine { continuation ->
     val database = Firebase.database
     val ref = database.getReference("citys")
@@ -156,6 +166,7 @@ suspend fun downloadImg(citySelec : String): List<String> = suspendCoroutine { c
     })
 }
 
+//Función para descargar los textos
 suspend fun downloadText(citySelec : String): List<String> = suspendCoroutine { continuation ->
     val database = Firebase.database
     val ref = database.getReference("Texts")
