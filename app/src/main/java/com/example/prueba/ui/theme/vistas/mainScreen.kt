@@ -59,6 +59,7 @@ fun WorldClockApp(navigationController: NavHostController) {
             .background(MaterialTheme.colorScheme.background)
             .padding(16.dp)
     ) {
+        //Barra de Búsqueda
         OutlinedTextField(
             value = searchText,
             onValueChange = { searchText = it },
